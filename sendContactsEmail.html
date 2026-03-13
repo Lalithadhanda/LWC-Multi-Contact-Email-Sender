@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Displaying Contact with LookupSearch for Email sending">
+        <lightning-input type="text" label="Enter search Name or Emai of Contact" onchange={handleChange}></lightning-input>
+
+        <template if:true={hasContacts}>
+               <ul class="slds-box">
+            <template for:each={contacts} for:item="item">
+            
+                    <li key ={item.Id}
+                        data-id={item.Id}
+                        data-name={item.Name}
+                        data-email={item.Email}
+                        onclick={selectContact} class="slds-p-small slds-border-bottom">
+                    
+                        {item.Name}{item.Email}
+                    </li>
+            
+            </template>
+            </ul>
+            
+
+            <lightning-pill-container items={selectedPills} onitemremove={handleItemRemove}></lightning-pill-container>
+        </template>
+
+        <lightning-input type="text" label="Subject" onchange={handleSubject}></lightning-input>
+        <lightning-textarea
+        
+        label="Enter your Message Here"
+        max-length="300"
+        onchange={handleMessage}></lightning-textarea>
+        <lightning-button label="Send EMail" onclick={handleMail} variant="brand"></lightning-button>
+    </lightning-card>
+</template>
